@@ -7,15 +7,16 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
 
 # Add an executable for my_node
 add_executable(my_node src/my_node.cpp)
 target_include_directories(my_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+target_link_libraries(${PROJECT_NAME}
+  ${rclcpp_LIBRARIES}
+)
 target_compile_features(my_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 
 # Install my_node executable to lib/${PROJECT_NAME}
@@ -26,22 +27,5 @@ install(TARGETS my_node
 install(PROGRAMS
   launch/my_package.launch.py
   DESTINATION share/${PROJECT_NAME})
-
-# If you have additional data files or directories to install, you can add them here.
-# For example, if you have configuration files or launch files in a config directory:
-# install(DIRECTORY config/
-#   DESTINATION share/${PROJECT_NAME}/config)
-
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
 
 ament_package()
