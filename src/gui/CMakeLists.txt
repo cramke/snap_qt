@@ -5,7 +5,7 @@ project(gui)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick Location REQUIRED)
 
 include_directories(
   ${ament_INCLUDE_DIRS}
@@ -13,6 +13,7 @@ include_directories(
   ${std_msgs_INCLUDE_DIRS}
   ${Qt5Core_INCLUDE_DIRS}
   ${Qt5Widgets_INCLUDE_DIRS}
+  ${Qt5Location_INCLUDE_DIRS}
 )
 
 # Include the Qt resource system
@@ -28,8 +29,8 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     Qt5::Core
     Qt5::Quick
+    Qt5::Location
     ${rclcpp_LIBRARIES}
-    ${std_msgs_INCLUDE_DIRS}
 )
 
 # Install the executable
@@ -42,3 +43,5 @@ install(PROGRAMS
   launch/gui.launch.py
   DESTINATION share/${PROJECT_NAME}
 )
+
+ament_package()
