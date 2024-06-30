@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Carsten GUI
+Exec=ros2-talker-listener
+Icon=${SNAP}/meta/gui/brush-icon.svg
+Comment=Figure out how it works
+Terminal=false
+Categories=Development;
+Name[en_US]=Carsten GUI
