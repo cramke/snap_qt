@@ -10,7 +10,9 @@ base: core22
 apps:
  ros2-talker-listener:
    command: opt/ros/humble/bin/ros2 launch gui gui.launch.py
-   extensions: [ros2-humble, kde-neon]
+   extensions:
+    - ros2-humble
+    - kde-neon
    environment:
       QT_QPA_PLATFORM: xcb
 
@@ -18,7 +20,11 @@ parts:
  ros2-demos:
    plugin: colcon
    source: .
-   build-packages: [make, gcc, g++]
-   stage-packages: 
+   colcon-packages:
+    - gui
+   build-packages:
+    - ros-humble-ros-core
+   stage-packages:
     - ros-humble-ros2launch
     - ros-humble-rclcpp
+    - ros-humble-std-msgs
